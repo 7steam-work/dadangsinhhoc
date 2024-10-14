@@ -34,3 +34,29 @@ UI/node_modules
 
 media/
 Media/
+
+# Logs
+UI/logs
+UI/*.log
+UI/npm-debug.log*
+UI/yarn-debug.log*
+UI/yarn-error.log*
+UI/pnpm-debug.log*
+UI/lerna-debug.log*
+
+UI/node_modules
+UI/dist
+UI/dist-ssr
+UI/*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
