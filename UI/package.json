@@ -4,10 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "../../../../Downloads/DaDangSinhHoc/DaDangSinhHoc/node_modules/.bin/vite",
-    "build": "../../../../Downloads/DaDangSinhHoc/DaDangSinhHoc/node_modules/.bin/tsc -b && vite build",
-    "lint": "../../../../Downloads/DaDangSinhHoc/DaDangSinhHoc/node_modules/.bin/eslint .",
-    "preview": "../../../../Downloads/DaDangSinhHoc/DaDangSinhHoc/node_modules/.bin/vite preview"
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint DaDangSinhHoc",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
