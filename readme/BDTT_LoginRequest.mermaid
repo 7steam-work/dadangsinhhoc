@@ -1,0 +1,30 @@
+graph TD
+    A[HTTP Request] --> B[JwtAuthenticationFilter]
+    B --> C{Check JWT Token}
+    C -->|No Token| D[SecurityFilterChain]
+    C -->|Has Token| E[Extract Username & Validate]
+    E -->|Invalid| D
+    E -->|Valid| F[UserDetailsService]
+    F --> G[Load User Details]
+    G --> H[Create Authentication Token]
+    H --> I[Set SecurityContext]
+    I --> D
+    D --> J{Check URL Path}
+    J -->|Whitelist| K[Allow Request]
+    J -->|Protected| L{Check Authentication}
+    L -->|Not Authenticated| M[Return 401]
+    L -->|Authenticated| N[Allow Request]
+    
+    %% Login Flow
+    O[Login Request] --> P[AuthenticationManager]
+    P --> Q[DaoAuthenticationProvider]
+    Q --> R[UserDetailsService]
+    R --> S[Load User]
+    Q --> T[PasswordEncoder]
+    T --> U[Verify Password]
+    S --> V[Compare & Validate]
+    U --> V
+    V -->|Success| W[Generate JWT Token]
+    W --> X[Save Token to DB]
+    X --> Y[Return Token]
+    V -->|Failure| Z[Return Error]

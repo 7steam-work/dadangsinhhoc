@@ -1,0 +1,43 @@
+sequenceDiagram
+    actor Client
+    participant AC as AuthController
+    participant AS as AuthService
+    participant AM as AuthenticationManager
+    participant SCH as SecurityContextHolder
+    participant UR as UserRepository
+    participant TR as TokenRepository
+    participant JS as JwtService
+
+    Client->>AC: POST /login (email, password)
+    AC->>AS: login(LoginDto)
+    
+    AS->>AM: authenticate(UsernamePasswordAuthenticationToken)
+    Note over AM: Validates credentials
+    
+    AM-->>AS: Authentication object
+    
+    AS->>SCH: setAuthentication(authentication)
+    
+    AS->>UR: findByEmail(email)
+    UR-->>AS: UserModel
+    
+    AS->>TR: findLastTokenByUser(user)
+    TR-->>AS: TokenModel
+    
+    alt Valid existing token
+        AS->>JS: isTokenValidWithData(user)
+        JS-->>AS: true
+        Note over AS: Use existing token
+    else No valid token
+        AS->>AS: revokeAllUserTokens(user)
+        AS->>JS: generateToken(user)
+        JS-->>AS: new JWT token
+        AS->>AS: saveToken(user, jwtToken)
+        AS->>TR: save(TokenModel)
+    end
+    
+    AS->>UR: save(user with updated lastSigninedTime)
+    
+    AS-->>AC: ResponseObject with JWT token
+    AC-->>Client: JWT token in response
+

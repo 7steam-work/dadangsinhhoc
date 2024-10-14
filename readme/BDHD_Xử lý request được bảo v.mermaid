@@ -1,0 +1,34 @@
+sequenceDiagram
+    actor Client
+    participant JF as JwtAuthenticationFilter
+    participant JS as JwtService
+    participant UDS as UserDetailsService
+    participant UR as UserRepository
+    participant SCH as SecurityContextHolder
+    participant EC as EmployeeController
+
+    Client->>JF: GET /api/employees
+    
+    Note over JF: Extract JWT from header
+    
+    JF->>JS: extractUsername(token)
+    JS-->>JF: userEmail
+    
+    alt userEmail != null && SecurityContext empty
+        JF->>UDS: loadUserByUsername(userEmail)
+        UDS->>UR: findByEmail(userEmail)
+        UR-->>UDS: UserModel
+        UDS-->>JF: UserDetails
+        
+        JF->>JS: isTokenValid(token, userDetails)
+        JS-->>JF: boolean
+        
+        alt token is valid
+            JF->>JF: Create UsernamePasswordAuthenticationToken
+            JF->>JF: Set WebAuthenticationDetails
+            JF->>SCH: setAuthentication(authentication)
+        end
+    end
+    
+    JF->>EC: Forward request
+    EC->>Client: List<Employees>

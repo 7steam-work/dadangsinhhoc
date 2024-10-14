@@ -1,0 +1,38 @@
+services:
+  db:
+    image: mysql:8.0.38
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin123
+      MYSQL_DATABASE: dongthucvat
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data/dongthucvat_backup_230924.sql:/docker-entrypoint-initdb.d/dongthucvat_backup_230924.sql
+    networks:
+      - mysql_network
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    ports:
+      - "80:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: admin123
+    networks:
+      - mysql_network
+    depends_on:
+      - db
+
+networks:
+  mysql_network:
+    driver: bridge

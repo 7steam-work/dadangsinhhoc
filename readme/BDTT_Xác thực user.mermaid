@@ -1,0 +1,12 @@
+graph TD
+    A[Authentication Request] --> B[AuthenticationManager]
+    B --> C[DaoAuthenticationProvider]
+    C --> D[UserDetailsService]
+    D --> E[Load User Details]
+    C --> F[PasswordEncoder]
+    F --> G[Verify Password]
+    E --> H[Compare & Validate]
+    G --> H
+    H --> I{Authentication Result}
+    I -->|Success| J[Return Authentication Token]
+    I -->|Failure| K[Throw AuthenticationException]
