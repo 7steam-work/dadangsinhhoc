@@ -1,24 +1,37 @@
 import React, { useState } from 'react';
-import { Box, Button, Link, Paper, Typography } from '@mui/material';
+import { Alert, Box, Button, Link, Paper, Typography } from '@mui/material';
 import InputTextField from '../../../../Components/FormControll/InputTextField'; // Import InputTextField
 import InputPasswordField from '../../../../Components/FormControll/InputPasswordField'; // Import InputPasswordField
 import { useNavigate } from 'react-router-dom';
+import authApi from '../../../../Api/AuthApi.tsx';
+
+interface use
 
 const LoginForm: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('admin@gmail.com');
+  const [password, setPassword] = useState('admin');
   const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  // const [passwordError, setPasswordError] = useState('');
 
   const navigate = useNavigate();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      if (email === 'admin@example.com' && password === 'password') {
-        navigate('/dashboard');
-      } else {
-        alert('Đăng nhập thất bại');
+      try {
+        const response = await authApi.login(email, password);
+        console.log(response);
+        if (response.code == "200") {
+          navigate('/dashboard');
+        } else {
+        console.error('Login error:');
+
+          <Alert severity="error">This is an error Alert.</Alert>
+        }
+      } catch (error) {
+        console.error('Login error in BE:', error);
+        <Alert severity="error">This is an error Alert.</Alert>
+
       }
     }
   };
@@ -38,15 +51,15 @@ const LoginForm: React.FC = () => {
     }
 
     // Kiểm tra mật khẩu
-    if (!password) {
-      setPasswordError('Vui lòng nhập mật khẩu');
-      isValid = false;
-    } else if (password.length < 6) {
-      setPasswordError('Mật khẩu phải có ít nhất 6 ký tự');
-      isValid = false;
-    } else {
-      setPasswordError(''); // Không có lỗi
-    }
+    // if (!password) {
+    //   setPasswordError('Vui lòng nhập mật khẩu');
+    //   isValid = false;
+    // } else if (password.length < 6) {
+    //   setPasswordError('Mật khẩu phải có ít nhất 6 ký tự');
+    //   isValid = false;
+    // } else {
+    //   setPasswordError(''); // Không có lỗi
+    // }
 
     return isValid;
   };
@@ -77,6 +90,7 @@ const LoginForm: React.FC = () => {
           onChange={(e) => setPassword(e.target.value)}
           error={!!passwordError}
           helperText={passwordError}
+          
         />
 
         <Box sx={{ textAlign: 'left', mb: 1 }}>
