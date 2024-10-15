@@ -4,10 +4,11 @@ import InputTextField from '../../../../Components/FormControll/InputTextField';
 import InputPasswordField from '../../../../Components/FormControll/InputPasswordField'; // Import InputPasswordField
 import CustomSnackbar from '../../../../Components/CustomSnackBar';
 import { useNavigate } from 'react-router-dom';
+import authApi from '../../../../Api/AuthApi.tsx';
 
 const LoginForm: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('admin@gmail.com');
+  const [password, setPassword] = useState('admin');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -16,17 +17,26 @@ const LoginForm: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      if (email === 'admin@example.com' && password === 'password') {
-        navigate('/dashboard');
-      } else {
+      try {
+        const response = await authApi.login(email, password);
+        console.log(response);
+        if (response.code === "200") {
+          navigate('/dashboard');
+        } else {
+          setSnackbarMessage('Đăng nhập thất bại');
+          setSnackbarOpen(true);
+        }
+      } catch (error) {
+        console.error('Login error in BE:', error);
         setSnackbarMessage('Đăng nhập thất bại');
         setSnackbarOpen(true);
       }
     }
   };
+
   const handleCloseSnackbar = (event?: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === 'clickaway') {
       return;
@@ -119,5 +129,6 @@ const LoginForm: React.FC = () => {
     </>
   );
 };
+
 
 export default LoginForm;
