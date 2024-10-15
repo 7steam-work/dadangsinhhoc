@@ -44,7 +44,3 @@ Contributions to the project are welcome. If you're interested in contributing, 
 * Test your changes thoroughly.
 * Submit a pull request.
 
-# Author
-* https://www.facebook.com/cnmnhqng33 @cnmnhqng33
-* https://www.facebook.com/ba.truong.0503/ @ba.truong.0503
-
