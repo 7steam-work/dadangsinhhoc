@@ -37,10 +37,10 @@ const UserManager: React.FC = () => {
           </TabList>
         </Box>
         <TabPanel value="1">
-          <CustomTable columns={columns} rows={adminUsers} />
+          <CustomTable columns={columns} rows={normalUsers} />
         </TabPanel>
         <TabPanel value="2">
-          <CustomTable columns={columns} rows={normalUsers} />
+          <CustomTable columns={columns} rows={adminUsers} />
         </TabPanel>
       </TabContext>
     </div>
