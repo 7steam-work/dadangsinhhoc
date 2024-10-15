@@ -1,6 +1,6 @@
-FROM openjdk:17-jdk-slim
+FROM openjdk:17
 
-# Thiết lập thư mục làm việc trong container
+# Set the working directory in the container
 WORKDIR /app
 
 # Sao chép file JAR của ứng dụng vào container
