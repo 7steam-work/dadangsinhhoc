@@ -1,61 +1,22 @@
 import React, { useState } from 'react';
-import { Box, Button, TextField, Typography, Link, Container, Paper, InputAdornment, IconButton } from '@mui/material';
+import { Box, Button, TextField, Typography, Container, Paper, InputAdornment, IconButton } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useNavigate } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
 import LoginHeader from './components/LoginHeader';
+import { Link } from 'react-router-dom';
+import {useEffect} from "react";
+import userApi from "../../Api/userApi.tsx";
 
 const Login: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = React.useState(false);
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-
-  const navigate = useNavigate();
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (validateForm()) {
-      if (email === 'admin@example.com' && password === 'password') {
-        navigate('/dashboard');
-      } else {
-        alert('Đăng nhập thất bại');
-      }
-    }
-  };
-
-  const validateForm = (): boolean => {
-    let isValid = true;
-
-    // Kiểm tra email
-    if (!email) {
-      setEmailError('Vui lòng nhập email');
-      isValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      setEmailError('Email không hợp lệ');
-      isValid = false;
-    } else {
-      setEmailError(''); // Không có lỗi
-    }
-
-    // Kiểm tra mật khẩu
-    if (!password) {
-      setPasswordError('Vui lòng nhập mật khẩu');
-      isValid = false;
-    } else if (password.length < 6) {
-      setPasswordError('Mật khẩu phải có ít nhất 6 ký tự');
-      isValid = false;
-    } else {
-      setPasswordError(''); // Không có lỗi
-    }
-
-    return isValid;
-  };
+  useEffect(() => {
+    const fetchUser = async () => {
+      const listUser = await userApi.getAll();
+      console.log(listUser);
+    };
+    fetchUser();
+  }, [])
 
   return (
     <Box
@@ -73,8 +34,8 @@ const Login: React.FC = () => {
         <LoginHeader />
         <LoginForm />
         <Box sx={{ textAlign: 'center', mt: 3 }}>
-          <Typography variant="body2" sx={{ color: 'white' }}>
-            <Link href="#" sx={{ fontWeight: 'bold', color: '#ffffff', textDecoration: 'underline' }}>
+          <Typography variant="body2" sx={{ fontWeight: 'bold', color: '#ffffff', textDecoration: 'underline' }}>
+            <Link to='/register'>
               Đăng ký tại đây
             </Link>
           </Typography>
