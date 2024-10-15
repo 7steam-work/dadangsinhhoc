@@ -1,46 +1,50 @@
-# Project Overview
+# React + TypeScript + Vite
 
-This project is designed to manage and provide information about various species of plants and animals. It includes a comprehensive database of species, their classification, habitats, and conservation status. The project aims to raise awareness about the importance of conservation and provide a platform for researchers, conservationists, and enthusiasts to access and contribute to the knowledge base.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-# Features
+Currently, two official plugins are available:
 
-* Species Database: A comprehensive database of plants and animals, including their classification, habitats, and conservation status.
-* Search Functionality: Users can search for species by their scientific name, common name, habitat, or conservation status.
-* Image Upload: Users can upload images of species to contribute to the database.
-* Validation: The system validates uploaded images to ensure they meet the required standards.
-* File Storage: The system stores uploaded images in a secure and organized manner.
-* Reporting: The system generates reports on species conservation status and provides insights for conservation efforts.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-# User Interface
+## Expanding the ESLint configuration
 
-The project includes a user-friendly interface built using HTML, CSS, and JavaScript. The UI is designed to provide an intuitive experience for users to navigate and interact with the database.
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-* Responsive Design: The UI is responsive and adapts to different screen sizes and devices.
-* Search Bar: A prominent search bar allows users to quickly search for species.
-* Species Cards: Species information is displayed in a card format, making it easy to scan and compare.
-* Image Gallery: A gallery feature allows users to view and upload images of species.
+- Configure the top-level `parserOptions` property like this:
 
+```js
+export default tseslint.config({
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
+```
 
-# Technologies Used
-## BE:
-* Java
-* Spring Framework
-* Hibernate
-* MySQL
-## FE:
-* HTML/CSS/JavaScript
-* Thymeleaf
-* Bootstrap
-* jQueryinteractions.
-* Vue.js
+- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
+- Optionally add `...tseslint.configs.stylisticTypeChecked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
 
-# Contribution Guidelines
+```js
+// eslint.config.js
+import react from 'eslint-plugin-react'
 
-Contributions to the project are welcome. If you're interested in contributing, please follow these guidelines:
-
-* Fork the project repository.
-* Create a new branch for your feature or fix.
-* Implement your changes.
-* Test your changes thoroughly.
-* Submit a pull request.
-
+export default tseslint.config({
+  // Set the react version
+  settings: { react: { version: '18.3' } },
+  plugins: {
+    // Add the react plugin
+    react,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended rules
+    ...react.configs.recommended.rules,
+    ...react.configs['jsx-runtime'].rules,
+  },
+})
+```

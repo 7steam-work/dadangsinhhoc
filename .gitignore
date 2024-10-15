@@ -1,53 +1,16 @@
-HELP.md
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
-target/
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
-.vscode/
-UI/node_modules
-
-media/
-Media/
-
 # Logs
-UI/logs
-UI/*.log
-UI/npm-debug.log*
-UI/yarn-debug.log*
-UI/yarn-error.log*
-UI/pnpm-debug.log*
-UI/lerna-debug.log*
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-UI/node_modules
-UI/dist
-UI/dist-ssr
-UI/*.local
+node_modules
+dist
+dist-ssr
+*.local
 
 # Editor directories and files
 .vscode/*
@@ -59,4 +22,3 @@ UI/*.local
 *.njsproj
 *.sln
 *.sw?
-
