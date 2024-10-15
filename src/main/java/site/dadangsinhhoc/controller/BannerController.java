@@ -10,6 +10,7 @@ import site.dadangsinhhoc.services.banner.IBannerService;
 @RestController
 @RequestMapping("/api/banner")
 @RequiredArgsConstructor(onConstructor_ = {@Autowired})
+@CrossOrigin
 public class BannerController {
     private final IBannerService bannerService;
 

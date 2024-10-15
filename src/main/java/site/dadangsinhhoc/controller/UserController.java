@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @RequestMapping("/api/users")
 @RequiredArgsConstructor(onConstructor_ = {@Autowired})
 @Slf4j
+@CrossOrigin
 public class UserController {
     private final IUserService userService;
 

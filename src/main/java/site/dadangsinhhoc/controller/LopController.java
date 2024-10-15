@@ -10,6 +10,7 @@ import site.dadangsinhhoc.services.lop.ILopService;
 @RestController
 @RequestMapping("/api/lop")
 @RequiredArgsConstructor(onConstructor_ = {@Autowired})
+@CrossOrigin
 public class LopController {
     private final ILopService lopService;
 

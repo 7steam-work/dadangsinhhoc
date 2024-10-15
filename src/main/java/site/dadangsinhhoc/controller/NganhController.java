@@ -9,6 +9,7 @@ import site.dadangsinhhoc.services.nganh.INganhService;
 
 @RestController
 @RequestMapping("/api/nganh")
+@CrossOrigin
 @RequiredArgsConstructor(onConstructor_ = {@Autowired})
 public class NganhController {
     private final INganhService nganhService;

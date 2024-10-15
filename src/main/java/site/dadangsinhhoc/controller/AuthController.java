@@ -1,11 +1,9 @@
 package site.dadangsinhhoc.controller;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import site.dadangsinhhoc.dto.LoginDto;
 import site.dadangsinhhoc.dto.response.ResponseObject;
 import site.dadangsinhhoc.dto.UserDTO;
 import site.dadangsinhhoc.services.auth.AuthService;
@@ -14,6 +12,7 @@ import site.dadangsinhhoc.services.auth.AuthService;
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor(onConstructor_ = {@Autowired})
 @Slf4j
+@CrossOrigin
 public class AuthController {
     private final AuthService authService;
 
