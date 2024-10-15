@@ -7,23 +7,34 @@ import { useNavigate } from 'react-router-dom';
 import authApi from '../../../../Api/AuthApi.tsx';
 
 const LoginForm: React.FC = () => {
+  //nhận value nhập vào
   const [email, setEmail] = useState('admin@gmail.com');
   const [password, setPassword] = useState('admin');
+  //check validate các trường
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  //snackbar thông báo
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
 
 
   const navigate = useNavigate();
 
+  interface LoginResponse {
+    code: string; // hoặc number, tùy thuộc vào API của bạn
+    // Thêm các thuộc tính khác nếu cần
+  }
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        const response = await authApi.login(email, password);
-        console.log(response);
-        if (response.code === "200") {
+        const response = await authApi.login(email, password) as unknown; // Ép kiểu thành unknown trước
+        const loginResponse = response as LoginResponse; // Sau đó ép kiểu thành LoginResponse
+
+        console.log(loginResponse);
+
+        if (loginResponse && loginResponse.code === "200") {
           navigate('/dashboard');
         } else {
           setSnackbarMessage('Đăng nhập thất bại');
@@ -31,7 +42,7 @@ const LoginForm: React.FC = () => {
         }
       } catch (error) {
         console.error('Login error in BE:', error);
-        setSnackbarMessage('Đăng nhập thất bại');
+        setSnackbarMessage('Đăng nhập thất bại do server');
         setSnackbarOpen(true);
       }
     }
