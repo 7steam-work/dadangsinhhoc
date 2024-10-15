@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import AdminLayout from '../Layouts/AdminLayout';
-import Login from '../pages/Login';
-import Register from '../pages/Register';
-import Dashboard from '../pages/Dashboard';
-import UserManager from '../pages/UserManager';
+import Login from '../Pages/Login';
+import Register from '../Pages/Register';
+import Dashboard from '../Pages/Dashboard';
+import UserManager from '../Pages/UserManager';
 
 const AppRoutes: React.FC = () => {
   return (
