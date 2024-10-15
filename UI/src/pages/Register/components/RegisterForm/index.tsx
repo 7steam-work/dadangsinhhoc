@@ -99,11 +99,11 @@ const LoginForm: React.FC = () => {
           helperText={rePasswordError}
         />
 
-        <Box sx={{ textAlign: 'left', mb: 1, color: '#065f46', textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
+        <Box sx={{ textAlign: 'left', mb: 1, textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
           <Typography variant="body2" color="textSecondary">
-            Bạn đã có tài khoản? <Link to="/">
+            Bạn đã có tài khoản? <span style={{ color: '#065f46' }}><Link to="/">
               Đăng nhập
-            </Link>
+            </Link></span>
           </Typography>
 
         </Box>
