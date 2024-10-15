@@ -22,8 +22,8 @@ public class AuthController {
         return authService.register(dto);
     }
 
-    @PostMapping("/login")
-    public ResponseObject login(@RequestParam String email, @RequestParam String password) throws Exception {
+    @PostMapping("/login/{email}/{password}")
+    public ResponseObject login(@PathVariable String email, @PathVariable String password) throws Exception {
         return authService.login(email, password);
     }
 }
