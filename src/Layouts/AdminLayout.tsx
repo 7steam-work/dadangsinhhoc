@@ -21,6 +21,7 @@ const AdminLayout: React.FC = () => {
           sx={{
             flexGrow: 1,
             p: 3,
+            pb: 0,
             backgroundColor: '#f4f6f8',
             minHeight: 'calc(100vh - 64px)',
           }}

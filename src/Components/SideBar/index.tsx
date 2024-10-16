@@ -7,7 +7,7 @@ const Sidebar: React.FC = () => {
   return (
     <Box
       sx={{
-        width: '250px',
+        minWidth: '250px',
         backgroundColor: '#065f46',
         color: 'white',
         minHeight: 'calc(100vh - 64px)',

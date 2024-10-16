@@ -1,58 +1,89 @@
-import React, { useEffect, useState } from 'react';
-import CustomTable, { Column } from '../../Components/Table';
-import { Box, Tab } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Button, Tab } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
-import UserApi from '../../Api/UserApi';
+import { useNavigate } from 'react-router-dom';
+import { useUserData } from './hooks/useUserData';
+import { UserTable } from './components/UserTable';
+import { User } from './type';
 
 const UserManager: React.FC = () => {
-  const [listUser, setListUser] = useState([]);
-  const [listAdmin, setListAdmin] = useState([]);
+  const navigate = useNavigate();
+  const [tabValue, setTabValue] = useState('1');
+  const { listUser, listAdmin, isLoading, handleStatusChange, refreshUsers } = useUserData();
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const responseUser = await UserApi.getUserByRoll("ROLE_USER");
-      setListUser(responseUser.data);
-
-      const responseAdmin = await UserApi.getUserByRoll("ROLE_ADMIN");
-      setListAdmin(responseAdmin.data);
-    }
-    fetchUser();
-  }, []);
-
-  const [value, setValue] = useState('1'); // State để theo dõi tab hiện tại
-
-  const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
-    setValue(newValue); // Cập nhật giá trị tab khi thay đổi
-
+  const handleTabChange = (_event: React.SyntheticEvent, newValue: string) => {
+    setTabValue(newValue);
   };
 
-  const columns: Column[] = [
-    { id: 'name', label: 'Tên', minWidth: 150, type: 'text' },
-    { id: 'email', label: 'Email', minWidth: 200, type: 'text' },
-    { id: 'phone', label: 'Số điện thoại', minWidth: 150, type: 'text' },
-    { id: 'gender', label: 'Giới tính', minWidth: 75, type: 'text' },
-    { id: 'address', label: 'Địa chỉ', minWidth: 150, type: 'text' },
-    { id: 'lastSigninedTime', label: 'Lần cuối đăng nhập', minWidth: 100, type: 'text' },
-    { id: 'status', label: 'Trạng thái', minWidth: 100, type: 'switch' },
-    { id: 'action', label: 'Hành động', minWidth: 200, type: 'action' },
-  ];
+  const handleView = (user: User) => {
+    navigate(`/user/${user.id}`);
+  };
+
+  const handleEdit = (user: User) => {
+    navigate(`/user/edit/${user.id}`);
+  };
+
+  const handleDelete = async (user: User) => {
+    // if (window.confirm('Bạn có chắc chắn muốn xóa người dùng này?')) {
+    //   try {
+    //     await UserApi.deleteUser(user.id);
+    //     refreshUsers(); // Refresh data sau khi xóa
+    //   } catch (error) {
+    //     console.error('Error deleting user:', error);
+    //     // Có thể thêm xử lý error ở đây
+    //   }
+    // }
+  };
 
   return (
     <div>
-      <h1>Danh sách</h1>
-      <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <TabList onChange={handleChange} aria-label="lab API tabs example">
+      <h1>Danh sách User</h1>
+      <TabContext value={tabValue}>
+        <Box sx={{
+          borderBottom: 1,
+          borderColor: 'divider',
+          display: 'flex',
+          alignItems: 'center',
+          mb: 2
+        }}>
+          <TabList onChange={handleTabChange}>
             <Tab label="User" value="1" />
             <Tab label="Admin" value="2" />
           </TabList>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => navigate('/add-user')}
+            sx={{ ml: 'auto', mr: 2 }}
+          >
+            Thêm mới
+          </Button>
         </Box>
-        <TabPanel value="1">
-          <CustomTable columns={columns} rows={listUser} />
-        </TabPanel>
-        <TabPanel value="2">
-          <CustomTable columns={columns} rows={listAdmin} />
-        </TabPanel>
+
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          <>
+            <TabPanel value="1">
+              <UserTable
+                users={listUser}
+                onStatusChange={handleStatusChange}
+                onView={handleView}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+              />
+            </TabPanel>
+            <TabPanel value="2">
+              <UserTable
+                users={listAdmin}
+                onStatusChange={handleStatusChange}
+                onView={handleView}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+              />
+            </TabPanel>
+          </>
+        )}
       </TabContext>
     </div>
   );
