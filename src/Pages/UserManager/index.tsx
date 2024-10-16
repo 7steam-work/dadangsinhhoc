@@ -4,6 +4,7 @@ import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { useNavigate } from 'react-router-dom';
 import { useUserData } from './hooks/useUserData';
 import { UserTable } from './components/UserTable';
+import UserApi from '../../Api/UserApi';
 import { User } from './type';
 
 const UserManager: React.FC = () => {
@@ -16,23 +17,25 @@ const UserManager: React.FC = () => {
   };
 
   const handleView = (user: User) => {
-    navigate(`/user/${user.id}`);
+    console.log('xem user', user.id)
+    // navigate(`/user/${user.id}`);
   };
 
   const handleEdit = (user: User) => {
-    navigate(`/user/edit/${user.id}`);
+    console.log('sửa user', user.id)
+    // navigate(`/user/edit/${user.id}`);
   };
 
   const handleDelete = async (user: User) => {
-    // if (window.confirm('Bạn có chắc chắn muốn xóa người dùng này?')) {
-    //   try {
-    //     await UserApi.deleteUser(user.id);
-    //     refreshUsers(); // Refresh data sau khi xóa
-    //   } catch (error) {
-    //     console.error('Error deleting user:', error);
-    //     // Có thể thêm xử lý error ở đây
-    //   }
-    // }
+    if (window.confirm('Bạn có chắc chắn muốn xóa người dùng này?')) {
+      try {
+        await UserApi.deleteUser(user.id);
+        refreshUsers(); // Refresh data sau khi xóa
+      } catch (error) {
+        console.error('Error deleting user:', error);
+        // Có thể thêm xử lý error ở đây
+      }
+    }
   };
 
   return (

@@ -6,9 +6,14 @@ const UserApi = {
         return getAPI.get(url)
     },
 
-    getUserByRoll(role: string){
+    getUserByRoll(role: string) {
         const url = `/users/getUsersByRole/${role}`;
         return getAPI.get(url);
+    },
+
+    deleteUser(id: string) {
+        const url = `/users/deleteUser/${id}`
+        return getAPI.delete(url);
     }
 
 };
