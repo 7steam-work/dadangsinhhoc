@@ -1,9 +1,9 @@
-import axiosClient from "./AxiosClient.tsx";
+import getAPI from "./AxiosClient.tsx";
 
 const UserApi = {
     getAll() {
         const url = '/users/getAllUser';
-        return axiosClient.get(url)
+        return getAPI.get(url)
     }
 
 };

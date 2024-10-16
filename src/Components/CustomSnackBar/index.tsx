@@ -6,7 +6,7 @@ interface CustomSnackbarProps {
   open: boolean;
   message: string;
   onClose: (event?: React.SyntheticEvent | Event, reason?: string) => void;
-  severity?: 'success' | 'info' | 'warning' | 'error';
+  severity: 'success' | 'info' | 'warning' | 'error';
 }
 
 

@@ -16,13 +16,14 @@ const LoginForm: React.FC = () => {
   //snackbar thông báo
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
-
+  const [snackbarSeverity, setSnackbarSeverity] = useState<'success' | 'info' | 'warning' | 'error'>('error');
 
   const navigate = useNavigate();
 
   interface LoginResponse {
-    code: string; // hoặc number, tùy thuộc vào API của bạn
-    // Thêm các thuộc tính khác nếu cần
+    code: string;
+    data: string;
+    message: string
   }
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -31,11 +32,20 @@ const LoginForm: React.FC = () => {
       try {
         const response = await authApi.login(email, password) as unknown; // Ép kiểu thành unknown trước
         const loginResponse = response as LoginResponse; // Sau đó ép kiểu thành LoginResponse
-
+        const token = loginResponse.data;
+        const message = loginResponse.message;
         console.log(loginResponse);
 
-        if (loginResponse && loginResponse.code === "200") {
-          navigate('/dashboard');
+        if (loginResponse.code == "200") {
+          console.log("Token: " + token)
+          localStorage.setItem('token', token);
+          setSnackbarMessage(message);
+          setSnackbarOpen(true);
+          setSnackbarSeverity('success')
+          // Redirect to dashboard after a short delay
+          setTimeout(() => {
+            navigate('/dashboard');
+          }, 1500);
         } else {
           setSnackbarMessage('Đăng nhập thất bại');
           setSnackbarOpen(true);
@@ -48,7 +58,7 @@ const LoginForm: React.FC = () => {
     }
   };
 
-  const handleCloseSnackbar = (event?: React.SyntheticEvent | Event, reason?: string) => {
+  const handleCloseSnackbar = (_event?: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -86,7 +96,7 @@ const LoginForm: React.FC = () => {
         open={snackbarOpen}
         message={snackbarMessage}
         onClose={handleCloseSnackbar}
-        severity='error'
+        severity={snackbarSeverity}
       />
       <Paper elevation={10} sx={{ p: 4, borderRadius: '8px' }}>
         <Box sx={{ textAlign: 'center', mb: 2 }}>

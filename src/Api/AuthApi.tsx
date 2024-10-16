@@ -1,10 +1,9 @@
-import axiosClient from "./AxiosClient.tsx";
+import getAPI from "./AxiosClient.tsx";
 
 const AuthApi = {
     login(email: string, password: string) {
-        console.log('Email: ' + email + "|  pw:" + password)
         const url = `/auth/login/${email}/${password}`;
-        return axiosClient.post(url)
+        return getAPI.post(url)
     },
 
     // register(UserData : UserDTO) {
