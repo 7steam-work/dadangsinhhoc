@@ -22,7 +22,7 @@ const AdminLayout: React.FC = () => {
             flexGrow: 1,
             p: 3,
             backgroundColor: '#f4f6f8',
-            minHeight: 'calc(100vh - 64px)', // Trừ chiều cao của Header
+            minHeight: 'calc(100vh - 64px)',
           }}
         >
           <Outlet />

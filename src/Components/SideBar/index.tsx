@@ -10,7 +10,7 @@ const Sidebar: React.FC = () => {
         width: '250px',
         backgroundColor: '#065f46',
         color: 'white',
-        minHeight: '100vh',
+        minHeight: 'calc(100vh - 64px)',
       }}
     >
       <List>
