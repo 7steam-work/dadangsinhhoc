@@ -1,6 +1,5 @@
-import React from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, IconButton } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
+import React, { useState } from 'react';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, IconButton, TablePagination } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
@@ -26,6 +25,23 @@ interface CustomTableProps {
 }
 
 const CustomTable: React.FC<CustomTableProps> = ({ columns, rows }) => {
+  const [page, setPage] = useState(0); // State cho trang hiện tại
+  const [rowsPerPage, setRowsPerPage] = useState(5); // Số hàng trên mỗi trang
+
+  // Hàm xử lý thay đổi trang
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
+  // Hàm xử lý thay đổi số hàng trên mỗi trang
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0); // Reset về trang đầu tiên khi thay đổi số hàng
+  };
+
+  // Tính toán hàng để hiển thị trên trang hiện tại
+  const displayedRows = rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+
 
   // Handlers cho các nút chức năng
   const handleDetail = (row: Row) => {
@@ -57,7 +73,7 @@ const CustomTable: React.FC<CustomTableProps> = ({ columns, rows }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row, index) => (
+            {displayedRows.map((row, index) => (
               <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                 {columns.map((column) => {
                   const value = row[column.id as keyof Row];
@@ -98,6 +114,16 @@ const CustomTable: React.FC<CustomTableProps> = ({ columns, rows }) => {
           </TableBody>
         </Table>
       </TableContainer>
+
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]} // Các tùy chọn số hàng trên mỗi trang
+        component="div"
+        count={rows.length} // Tổng số hàng
+        rowsPerPage={rowsPerPage} // Số hàng trên mỗi trang
+        page={page} // Trang hiện tại
+        onPageChange={handleChangePage} // Hàm xử lý thay đổi trang
+        onRowsPerPageChange={handleChangeRowsPerPage} // Hàm xử lý thay đổi số hàng trên mỗi trang
+      />
     </Paper>
   );
 };

@@ -23,22 +23,20 @@ const UserManager: React.FC = () => {
 
   const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue); // Cập nhật giá trị tab khi thay đổi
-    
+
   };
 
   const columns: Column[] = [
     { id: 'name', label: 'Tên', minWidth: 150, type: 'text' },
     { id: 'email', label: 'Email', minWidth: 200, type: 'text' },
-    { id: 'phone', label: 'Số điện thoại', minWidth: 100, type: 'text' },
-    { id: 'dob', label: 'Tuổi', minWidth: 75, type: 'text' },
+    { id: 'phone', label: 'Số điện thoại', minWidth: 150, type: 'text' },
     { id: 'gender', label: 'Giới tính', minWidth: 75, type: 'text' },
-    { id: 'address', label: 'Địa chỉ', minWidth: 100, type: 'text' },
+    { id: 'address', label: 'Địa chỉ', minWidth: 150, type: 'text' },
     { id: 'lastSigninedTime', label: 'Lần cuối đăng nhập', minWidth: 100, type: 'text' },
-    { id: 'age', label: 'Tuổi', minWidth: 100, type: 'text' },
     { id: 'status', label: 'Trạng thái', minWidth: 100, type: 'switch' },
-    { id: 'action', label: 'Hành động', minWidth: 100, type: 'action' },
+    { id: 'action', label: 'Hành động', minWidth: 200, type: 'action' },
   ];
-  
+
   return (
     <div>
       <h1>Danh sách</h1>
