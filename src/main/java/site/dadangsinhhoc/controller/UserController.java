@@ -88,6 +88,7 @@ public class UserController {
     }
 
     @GetMapping("/getUsersByRole/{role}")
+    @CrossOrigin
     public ResponseEntity<ResponseObject> getUsersByRole(@PathVariable String role) {
         ResponseObject response = userService.getUsersByRole(role);
         return ResponseEntity.status(response.code()).body(response);
