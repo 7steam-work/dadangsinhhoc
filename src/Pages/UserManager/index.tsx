@@ -17,13 +17,13 @@ const UserManager: React.FC = () => {
   };
 
   const handleView = (user: User) => {
-    console.log('xem user', user.id)
-    // navigate(`/user/${user.id}`);
+    // console.log('xem user', user.id)
+    navigate(`/user/${user.id}`);
   };
 
   const handleEdit = (user: User) => {
-    console.log('sửa user', user.id)
-    // navigate(`/user/edit/${user.id}`);
+    // console.log('sửa user', user.id)
+    navigate(`/user/edit/${user.id}`);
   };
 
   const handleDelete = async (user: User) => {
