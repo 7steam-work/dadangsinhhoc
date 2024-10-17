@@ -27,7 +27,7 @@ export const useUserForm = (userId?: string) => {
           const userData = response.data;
           setFormData({
             ...userData,
-            password: userData.password // Clear password in edit mode
+            password: userData.password
           });
         } catch (error) {
           console.error('Error fetching user:', error);

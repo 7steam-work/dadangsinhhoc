@@ -1,39 +1,54 @@
 import React, { useState } from 'react';
 import { Box, Button, Tab } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { useUserData } from './hooks/useUserData';
 import { UserTable } from './components/UserTable';
+import { UserModal } from './components/UserModal';
 import UserApi from '../../Api/UserApi';
 import { User } from './type';
 
 const UserManager: React.FC = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [tabValue, setTabValue] = useState('1');
   const { listUser, listAdmin, isLoading, handleStatusChange, refreshUsers } = useUserData();
+
+  // State for modal
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState<string | undefined>();
+  const [modalMode, setModalMode] = useState<'add' | 'edit' | 'readonly'>('add');
 
   const handleTabChange = (_event: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
   };
 
+  const handleOpenModal = (mode: 'add' | 'edit' | 'readonly', userId?: string) => {
+    setModalMode(mode);
+    setSelectedUserId(userId);
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+    setSelectedUserId(undefined);
+    // refreshUsers();
+  };
+
   const handleView = (user: User) => {
-    // console.log('xem user', user.id)
-    navigate(`/user/${user.id}`);
+    handleOpenModal('readonly', user.id);
   };
 
   const handleEdit = (user: User) => {
-    // console.log('sửa user', user.id)
-    navigate(`/user/edit/${user.id}`);
+    handleOpenModal('edit', user.id);
   };
 
   const handleDelete = async (user: User) => {
     if (window.confirm('Bạn có chắc chắn muốn xóa người dùng này?')) {
       try {
         await UserApi.deleteUser(user.id);
-        refreshUsers(); // Refresh data sau khi xóa
+        refreshUsers();
       } catch (error) {
         console.error('Error deleting user:', error);
-        // Có thể thêm xử lý error ở đây
       }
     }
   };
@@ -56,7 +71,7 @@ const UserManager: React.FC = () => {
           <Button
             variant="contained"
             color="primary"
-            onClick={() => navigate('/add-user')}
+            onClick={() => handleOpenModal('add')}
             sx={{ ml: 'auto', mr: 2 }}
           >
             Thêm mới
@@ -87,6 +102,12 @@ const UserManager: React.FC = () => {
             </TabPanel>
           </>
         )}
+        <UserModal
+          open={modalOpen}
+          onClose={handleCloseModal}
+          userId={selectedUserId}
+          mode={modalMode}
+        />
       </TabContext>
     </div>
   );

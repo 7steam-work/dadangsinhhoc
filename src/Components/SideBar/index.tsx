@@ -20,6 +20,9 @@ const Sidebar: React.FC = () => {
         <ListItemButton component={NavLink} to="/user">
           <ListItemText primary="User" />
         </ListItemButton>
+        <ListItemButton component={NavLink} to="/Bo">
+          <ListItemText primary="Bộ" />
+        </ListItemButton>
       </List>
     </Box>
   );
