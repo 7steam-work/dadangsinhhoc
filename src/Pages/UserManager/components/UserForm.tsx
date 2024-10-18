@@ -103,8 +103,8 @@ export const UserForm: React.FC<UserFormProps> = ({ userId, onSuccess, isModal, 
               label="Giới tính"
               disabled={readOnly}
             >
-              <MenuItem value="1">Nam</MenuItem>
-              <MenuItem value="0">Nữ</MenuItem>
+              <MenuItem value="MALE">Nam</MenuItem>
+              <MenuItem value="FEMALE">Nữ</MenuItem>
               {/* <MenuItem value="OTHER">Khác</MenuItem> */}
             </Select>
             {errors.gender && <FormHelperText>{errors.gender}</FormHelperText>}
@@ -137,6 +137,17 @@ export const UserForm: React.FC<UserFormProps> = ({ userId, onSuccess, isModal, 
           </Grid>
         )}
 
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              type="date"
+              value={formData.dob}
+              onChange={(e) => handleInputChange('dob', e.target.value)}
+              error={!!errors.dob}
+              disabled={readOnly}
+            />
+          </Grid>
+
         <Grid item xs={12} sm={6}>
           <FormControl fullWidth error={!!errors.role}>
             <InputLabel>Vai trò</InputLabel>
@@ -166,25 +177,6 @@ export const UserForm: React.FC<UserFormProps> = ({ userId, onSuccess, isModal, 
           />
         </Grid>
 
-        {/* <Grid item xs={12}>
-          <Box sx={{ display: 'flex', gap: 2, justifyContent: 'flex-end' }}>
-            <Button
-              variant="outlined"
-              onClick={isModal ? onSuccess : () => navigate('/user')}
-              disabled={isSubmitting}
-            >
-              Hủy
-            </Button>
-            <Button
-              type="submit"
-              variant="contained"
-              disabled={isSubmitting}
-              startIcon={isSubmitting ? <CircularProgress size={20} /> : null}
-            >
-              {userId ? 'Cập nhật' : 'Thêm mới'}
-            </Button>
-          </Box>
-        </Grid> */}
         {!readOnly && (
           <Grid item xs={12}>
             <Box sx={{ display: 'flex', gap: 2, justifyContent: 'flex-end' }}>

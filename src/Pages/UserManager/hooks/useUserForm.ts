@@ -11,7 +11,8 @@ export const useUserForm = (userId?: string) => {
     address: '',
     password: '',
     role: 'ROLE_USER',
-    status: true
+    status: true,
+    dob: ''
   });
 
   const [errors, setErrors] = useState<UserFormErrors>({});

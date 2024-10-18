@@ -26,6 +26,11 @@ const UserApi = {
         return getAPI.put(url, data)
     },
 
+    updateUserStatus(id:string, newStatus:boolean){
+        const url = `/users/updateUserStatus/${id}`
+        return getAPI.put(url,newStatus)
+    },
+
     deleteUser(id: string) {
         const url = `/users/deleteUser/${id}`
         return getAPI.delete(url);

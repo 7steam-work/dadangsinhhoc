@@ -16,6 +16,7 @@ export interface UserFormData {
   gender: string;
   address: string;
   password?: string; // Optional for edit mode
+  dob: string;
   role: string;
   status: boolean;
 }
@@ -27,6 +28,7 @@ export interface UserFormErrors {
   gender?: string;
   address?: string;
   password?: string;
+  dob?: Date;
   role?: string;
   status?: boolean;
 }

@@ -31,7 +31,7 @@ const UserManager: React.FC = () => {
   const handleCloseModal = () => {
     setModalOpen(false);
     setSelectedUserId(undefined);
-    // refreshUsers();
+    refreshUsers();
   };
 
   const handleView = (user: User) => {

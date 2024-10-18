@@ -44,19 +44,19 @@ export const useUserData = () => {
   }, []);
 
   const handleStatusChange = async (user: User, newStatus: boolean) => {
-    // try {
-    //   // Gọi API để cập nhật status
-    //   await UserApi.updateUserStatus(user.id, newStatus);
-    //   // Cập nhật local state
-    //   const updateList = (list: User[]) =>
-    //     list.map(item => item.id === user.id ? { ...item, status: newStatus } : item);
+    try {
+      // Gọi API để cập nhật status
+      await UserApi.updateUserStatus(user.id, newStatus);
+      // Cập nhật local state
+      const updateList = (list: User[]) =>
+        list.map(item => item.id === user.id ? { ...item, status: newStatus } : item);
 
-    //   setListUser(updateList(listUser));
-    //   setListAdmin(updateList(listAdmin));
-    // } catch (error) {
-    //   console.error('Error updating user status:', error);
-    //   // Có thể thêm xử lý error ở đây
-    // }
+      setListUser(updateList(listUser));
+      setListAdmin(updateList(listAdmin));
+    } catch (error) {
+      console.error('Error updating user status:', error);
+      // Có thể thêm xử lý error ở đây
+    }
   };
 
   return {
