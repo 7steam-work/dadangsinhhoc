@@ -44,3 +44,14 @@ Contributions to the project are welcome. If you're interested in contributing, 
 * Test your changes thoroughly.
 * Submit a pull request.
 
+# Start and Build Api:
+```cmd
+.\run.bat
+```
+hoặc trên power shell:
+```cmd
+Set-ExecutionPolicy RemoteSigned
+run.bat
+```
+
+
