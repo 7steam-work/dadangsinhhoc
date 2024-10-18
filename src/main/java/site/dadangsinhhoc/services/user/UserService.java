@@ -1,5 +1,6 @@
 package site.dadangsinhhoc.services.user;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import site.dadangsinhhoc.dto.response.ResponseObject;
 import site.dadangsinhhoc.exception.ErrorCode;
 import site.dadangsinhhoc.models.UserModel;
+import site.dadangsinhhoc.repositories.TokenRepository;
 import site.dadangsinhhoc.repositories.UserRepository;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -25,6 +27,7 @@ import java.util.*;
 @RequiredArgsConstructor(onConstructor_ = {@Autowired})
 public class UserService implements IUserService{
     private final UserRepository userRepository;
+    private final TokenRepository tokenRepository;
 //    private final BCryptPasswordEncoder pwEncoder;
 
     @Override
@@ -91,7 +94,8 @@ public class UserService implements IUserService{
             UserModel savedUser = UserModel.builder()
                     .name(name)
                     .email(email)
-//                    .password(pwEncoder.encode(pw))
+//                  .password(pwEncoder.encode(pw))
+                    .password(pw)
                     .phone(phone)
                     .gender(gender)
                     .dob(dob)
@@ -136,10 +140,20 @@ public class UserService implements IUserService{
     }
 
     @Override
+    @Transactional
     public ResponseObject deleteUser(int id) {
-        if (userRepository.existsById(id)) {
+        Optional<UserModel> userOptional = userRepository.findById(id);
+
+        if (userOptional.isPresent()) {
+            UserModel user = userOptional.get();
+
+            // Xóa tất cả token của người dùng trước khi xóa người dùng
+            tokenRepository.deleteByUser(user);
+
+            // Xóa người dùng
             userRepository.deleteById(id);
-            return ResponseObject.success("Successfully delete record " + id, null);
+
+            return ResponseObject.success("Successfully deleted user and associated tokens", null);
         } else {
             return ResponseObject.error(ErrorCode.NOT_FOUND.getCode(), ErrorCode.NOT_FOUND.getMessage());
         }
@@ -171,6 +185,26 @@ public class UserService implements IUserService{
         } catch (Exception e) {
             log.error("An error occurred while updating the user: {}", e.getMessage());
             return ResponseObject.error(ErrorCode.INTERNAL_SERVER_ERROR.getCode(), "An error occurred while updating the user: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public ResponseObject updateUserStatus(int id, Boolean status) {
+        try {
+            Optional<UserModel> existingUserOptional = userRepository.findById(id);
+            if (existingUserOptional.isEmpty()) {
+                return ResponseObject.error(ErrorCode.NOT_FOUND.getCode(), "User not found");
+            }
+
+            UserModel existingUser = existingUserOptional.get();
+            existingUser.setStatus(status);  // Cập nhật trạng thái người dùng
+            existingUser.setUpdatedAt(LocalDateTime.now());
+
+            UserModel savedUser = userRepository.save(existingUser);
+            return ResponseObject.success("User status updated successfully", savedUser);
+        } catch (Exception e) {
+            log.error("An error occurred while updating the user status: {}", e.getMessage());
+            return ResponseObject.error(ErrorCode.INTERNAL_SERVER_ERROR.getCode(), "An error occurred while updating the user status: " + e.getMessage());
         }
     }
 

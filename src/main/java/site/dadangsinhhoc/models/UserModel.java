@@ -1,5 +1,6 @@
 package site.dadangsinhhoc.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,6 +39,7 @@ public class UserModel implements UserDetails{
     private String role;
 
     @Override
+    @JsonIgnore  // Thêm annotation này để bỏ qua quyền hạn khi trả về JSON
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singletonList(new SimpleGrantedAuthority(role));
     }

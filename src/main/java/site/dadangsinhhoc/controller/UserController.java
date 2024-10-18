@@ -69,6 +69,12 @@ public class UserController {
         return ResponseEntity.status(response.code()).body(response);
     }
 
+    @PutMapping("/updateUserStatus/{id}")
+    public ResponseEntity<ResponseObject> updateUserStatus(@PathVariable Integer id, @RequestParam Boolean status) {
+        ResponseObject response = userService.updateUserStatus(id, status);
+        return ResponseEntity.status(response.code()).body(response);
+    }
+
     @GetMapping("/getAllUser")
     public ResponseEntity<ResponseObject> getAllUsers() {
         ResponseObject response = userService.getAllUsers();

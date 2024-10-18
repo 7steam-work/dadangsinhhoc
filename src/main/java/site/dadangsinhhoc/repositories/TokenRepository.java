@@ -17,4 +17,6 @@ public interface TokenRepository extends JpaRepository<TokenModel, Integer> {
     
     @Query("SELECT t FROM TokenModel t WHERE t.user = :user AND t.expired = false AND t.revoked = false ORDER BY t.expirationDate DESC")
     TokenModel findLastTokenByUser(@Param("user") UserModel user);
+
+    void deleteByUser(UserModel user);
 }
