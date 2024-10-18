@@ -26,6 +26,8 @@ public interface IUserService {
 
      ResponseObject updateUser(Integer id, UserModel updatedUser);
 
+     ResponseObject updateUserStatus(int id, Boolean status);
+
      ResponseObject getAllUsers();
 
      ResponseObject countAllUsers();
