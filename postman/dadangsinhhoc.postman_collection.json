@@ -7,162 +7,759 @@
 	},
 	"item": [
 		{
-			"name": "api",
+			"name": "loai",
 			"item": [
 				{
-					"name": "loai",
-					"item": [
-						{
-							"name": "addNew",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkYWRhbmdzaW5oaG9jLnNpdGUiLCJzdWIiOiJhZG1pbiIsImV4cCI6MTcyMjQ4NTg5NiwiaWF0IjoxNzIyNDgyMjk2LCJzY29wZSI6IlJPTEVfQURNSU4ifQ.kH-R3iGbKJVS-8ixN8AAbEskgZZ1GBFZRkIWsuq0q9hevkyfd_Y9S9NyX9jfuXYzslS6E7JuqRV0pqlZ1oQydg",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8080/getBo",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"getBo"
-									]
+					"name": "addImage",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkYWRhbmdzaW5oaG9jLnNpdGUiLCJzdWIiOiJhZG1pbiIsImV4cCI6MTcyMjQ4NTg5NiwiaWF0IjoxNzIyNDgyMjk2LCJzY29wZSI6IlJPTEVfQURNSU4ifQ.kH-R3iGbKJVS-8ixN8AAbEskgZZ1GBFZRkIWsuq0q9hevkyfd_Y9S9NyX9jfuXYzslS6E7JuqRV0pqlZ1oQydg",
+									"type": "string"
 								}
-							},
-							"response": []
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:8080/getBo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"getBo"
+							]
 						}
-					]
+					},
+					"response": []
 				},
 				{
-					"name": "bo",
-					"item": [
-						{
-							"name": "getBo",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkYWRhbmdzaW5oaG9jLnNpdGUiLCJzdWIiOiJhZG1pbiIsImV4cCI6MTcyMjQ4NTg5NiwiaWF0IjoxNzIyNDgyMjk2LCJzY29wZSI6IlJPTEVfQURNSU4ifQ.kH-R3iGbKJVS-8ixN8AAbEskgZZ1GBFZRkIWsuq0q9hevkyfd_Y9S9NyX9jfuXYzslS6E7JuqRV0pqlZ1oQydg",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/getBo",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"getBo"
-									]
+					"name": "addNew",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "http://localhost:8080/api/users/createUser",
+									"type": "string"
 								}
-							},
-							"response": []
+							]
 						},
-						{
-							"name": "countAllBo",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkYWRhbmdzaW5oaG9jLnNpdGUiLCJzdWIiOiJhZG1pbiIsImV4cCI6MTcyMjQ4NjAxNywiaWF0IjoxNzIyNDgyNDE3LCJzY29wZSI6IlJPTEVfQURNSU4ifQ.vgQX6824xyouOYoVH4KjOQe3I20m1eE34nBa9CPt--Op0or-Wj8lp_-peaFwbaMMVB2teloT0S3oE8G0UeMWqg",
-											"type": "string"
-										}
-									]
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "1000",
+									"type": "text"
 								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8080/countAllBo",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"countAllBo"
-									]
+								{
+									"key": "ho.id",
+									"value": "273",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "test upload img 3",
+									"type": "text"
+								},
+								{
+									"key": "nameLatinh",
+									"value": "demo",
+									"type": "text"
+								},
+								{
+									"key": "dacDiem",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "giaTriSuDung",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "phanBo",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "nguonTaiLieu ",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "thumbnail",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "mucDoBaoTonIUCN ",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "mucDoBaoTonSDVN ",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "mucDoBaoTonNDCP ",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "mucDoBaoTonND64CP ",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "status ",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "createdAt ",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "createdBy ",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "updatedAt ",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "updatedBy ",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "rPH",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "thumbnails",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "loai",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "images",
+									"type": "file",
+									"src": []
 								}
-							},
-							"response": []
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/loai/addNew",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"loai",
+								"addNew"
+							]
 						}
-					]
+					},
+					"response": []
 				},
 				{
-					"name": "use",
-					"item": [
-						{
-							"name": "authenticate",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080//api/users/authenticate/admin/admin",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"",
-										"api",
-										"users",
-										"authenticate",
-										"admin",
-										"admin"
-									]
+					"name": "http://localhost:8080/api/loai/addNew",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
 								}
-							},
-							"response": []
+							]
 						},
-						{
-							"name": "findUserById/{id}",
-							"request": {
-								"method": "GET",
-								"header": []
-							},
-							"response": []
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "1000",
+									"type": "text"
+								},
+								{
+									"key": "ho.id",
+									"value": "273",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "test upload img 3",
+									"type": "text"
+								},
+								{
+									"key": "nameLatinh",
+									"value": "demo",
+									"type": "text"
+								},
+								{
+									"key": "dacDiem",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "giaTriSuDung",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "phanBo",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "nguonTaiLieu ",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "thumbnail",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "mucDoBaoTonIUCN ",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "mucDoBaoTonSDVN ",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "mucDoBaoTonNDCP ",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "mucDoBaoTonND64CP ",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "status ",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "createdAt ",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "createdBy ",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "updatedAt ",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "updatedBy ",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "rPH",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "thumbnails",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "loai",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "images",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "images",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/loai/addNew",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"loai",
+								"addNew"
+							]
 						}
-					]
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "bo",
+			"item": [
+				{
+					"name": "getBo",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/bo/getAllBo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"bo",
+								"getAllBo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "countAllBo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkYWRhbmdzaW5oaG9jLnNpdGUiLCJzdWIiOiJhZG1pbiIsImV4cCI6MTcyMjQ4NjAxNywiaWF0IjoxNzIyNDgyNDE3LCJzY29wZSI6IlJPTEVfQURNSU4ifQ.vgQX6824xyouOYoVH4KjOQe3I20m1eE34nBa9CPt--Op0or-Wj8lp_-peaFwbaMMVB2teloT0S3oE8G0UeMWqg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/countAllBo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"countAllBo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "user@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "user",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/signIn",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"signIn"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "admin@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update status",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"id\": 11,\r\n\"status\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/updateUserStatus",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"updateUserStatus"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "admin@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVzZXJAZ21haWwuY29tIiwic3ViIjoidXNlckBnbWFpbC5jb20iLCJleHAiOjE3MzA1NDAwMzl9.zE1XQUNBAmz06LfHOSIAmkqDm9fhHJZnvYL9Mjec7U8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"John Doe\",\r\n  \"email\": \"johndoe@gmail.com\",\r\n  \"password\": \"johndoe\",\r\n  \"phone\": \"123456789\",\r\n  \"gender\": \"male\",\r\n  \"dob\": \"1990-01-01\",\r\n  \"address\": \"123 Main St, Springfield\",\r\n  \"createdAt\": \"2024-10-17T12:00:00\",\r\n  \"updatedAt\": \"2024-10-17T12:00:00\",\r\n  \"lastSigninedTime\": \"2024-10-17T12:00:00\",\r\n  \"status\": 1,\r\n  \"role\": \"ROLE_USER\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/createUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"createUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findUserById/{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/users/findUserById/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"findUserById",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/users/getAllUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"getAllUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findUserByEmail/{email}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/users/findUserByEmail/admin@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"findUserByEmail",
+								"admin@gmail.com"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"string2\",\r\n  \"password\": \"string2\",\r\n  \"email\": \"string2@gmail.com\",\r\n  \"phone\": \"string\",\r\n  \"gender\": \"string\",\r\n  \"dob\": \"2024-10-07\",\r\n  \"address\": \"string\",\r\n  \"role\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "admin@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "admin@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "admin@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
