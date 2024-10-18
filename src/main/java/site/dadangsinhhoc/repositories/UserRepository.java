@@ -10,7 +10,7 @@ public interface UserRepository extends JpaRepository<UserModel, Integer> {
     UserModel findByEmail(String email);
     UserModel findByName(String userName);
     UserModel findByPhone(String phone);
-    UserModel findById(Long id);
+    UserModel findUserModelById(Integer id);
     List<UserModel> findByRole(String role);
 
     boolean existsByEmail(String email);

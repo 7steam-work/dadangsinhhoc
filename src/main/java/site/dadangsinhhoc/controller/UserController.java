@@ -1,10 +1,12 @@
 package site.dadangsinhhoc.controller;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import site.dadangsinhhoc.dto.UserDTO;
 import site.dadangsinhhoc.dto.response.ResponseObject;
 import site.dadangsinhhoc.models.UserModel;
 import site.dadangsinhhoc.services.user.IUserService;
@@ -34,17 +36,9 @@ public class UserController {
     }
 
     @PostMapping("/createUser")
-    public ResponseObject createUser(
-            @RequestParam String name,
-            @RequestParam String email,
-            @RequestParam String pw,
-            @RequestParam String repw,
-            @RequestParam String phone,
-            @RequestParam String gender,
-            @RequestParam LocalDate dob,
-            @RequestParam String address
+    public ResponseObject createUser(@RequestBody UserDTO userModel
     ) {
-        return userService.createNewUser(name, email, pw, repw, phone, gender, dob, address);
+        return userService.createNewUser(userModel);
     }
 
     @PostMapping("/signIn")
@@ -69,10 +63,11 @@ public class UserController {
         return ResponseEntity.status(response.code()).body(response);
     }
 
-    @PutMapping("/updateUserStatus/{id}")
-    public ResponseEntity<ResponseObject> updateUserStatus(@PathVariable Integer id, @RequestParam Boolean status) {
-        ResponseObject response = userService.updateUserStatus(id, status);
-        return ResponseEntity.status(response.code()).body(response);
+    @PutMapping("/updateUserStatus")
+    public ResponseObject updateUserStatus(@RequestBody JsonNode payload) {
+        Integer id = payload.get("id").asInt();
+        Boolean status = payload.get("status").asBoolean();
+        return userService.updateUserStatus(id, status);
     }
 
     @GetMapping("/getAllUser")
