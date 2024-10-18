@@ -10,6 +10,7 @@ import site.dadangsinhhoc.services.helper.IHelperService;
 @RestController
 @RequestMapping("/api/helper")
 @RequiredArgsConstructor(onConstructor_ = {@Autowired})
+@CrossOrigin
 public class HelperController {
 
     private final IHelperService helperService;

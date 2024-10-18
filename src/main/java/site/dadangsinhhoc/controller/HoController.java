@@ -10,6 +10,7 @@ import site.dadangsinhhoc.services.ho.IHoService;
 @RestController
 @RequestMapping("/api/Ho")
 @RequiredArgsConstructor(onConstructor_ = {@Autowired})
+@CrossOrigin
 public class HoController {
     private final IHoService IHoService;
 

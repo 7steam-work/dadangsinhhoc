@@ -10,6 +10,7 @@ import site.dadangsinhhoc.services.bo.IBoService;
 @RestController
 @RequestMapping("/api/bo")
 @RequiredArgsConstructor(onConstructor_ = {@Autowired})
+@CrossOrigin
 public class BoController {
     private final IBoService boService;
 

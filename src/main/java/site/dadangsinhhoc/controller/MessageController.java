@@ -10,6 +10,7 @@ import site.dadangsinhhoc.services.message.IMessageService;
 @RestController
 @RequestMapping("/api/message")
 @RequiredArgsConstructor(onConstructor_ = {@Autowired})
+@CrossOrigin
 public class MessageController {
     private final IMessageService messageService;
 

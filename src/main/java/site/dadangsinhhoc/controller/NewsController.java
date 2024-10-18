@@ -9,6 +9,7 @@ import site.dadangsinhhoc.services.news.INewsService;
 
 @RestController
 @RequestMapping("/api/news")
+@CrossOrigin
 @RequiredArgsConstructor(onConstructor_ = {@Autowired})
 public class NewsController {
     private final INewsService newsService;

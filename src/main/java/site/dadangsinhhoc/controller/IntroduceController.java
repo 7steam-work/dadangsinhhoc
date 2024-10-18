@@ -10,6 +10,7 @@ import site.dadangsinhhoc.services.introduce.IIntroduceService;
 @RestController
 @RequestMapping("/api/introduce")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@CrossOrigin
 public class IntroduceController {
     private final IIntroduceService introduceService;
 

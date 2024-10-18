@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/loai")
 @RequiredArgsConstructor(onConstructor_ = {@Autowired})
+@CrossOrigin
 public class LoaiController {
     private final ILoaiService ILoaiService;
 

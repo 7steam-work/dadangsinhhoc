@@ -22,7 +22,7 @@ public class AuthController {
         return authService.register(dto);
     }
 
-    @PostMapping("/login/")
+    @PostMapping("/login/{email}/{password}")
     public ResponseObject login(@PathVariable String email, @PathVariable String password) throws Exception {
         return authService.login(email, password);
     }
