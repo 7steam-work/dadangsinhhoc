@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import site.dadangsinhhoc.dto.UserDTO;
 import site.dadangsinhhoc.dto.response.ResponseObject;
 import site.dadangsinhhoc.exception.ErrorCode;
 import site.dadangsinhhoc.models.UserModel;
@@ -63,15 +64,12 @@ public class UserService implements IUserService{
     }
 
     @Override
-    public ResponseObject createNewUser(String name, String email, String pw, String repw, String phone, String gender, LocalDate dob, String address) {
+    public ResponseObject createNewUser(UserDTO input) {
         try {
-            if (userRepository.existsByEmail(email)) {
+            if (userRepository.existsByEmail(input.getEmail())) {
                 return ResponseObject.error(ErrorCode.CONFLICT.getCode(), "Email already exists");
             }
-            if (!pw.equals(repw)){
-                return ResponseObject.error(ErrorCode.CONFLICT.getCode(), "Passwords do not match");
-            }
-            if (userRepository.existsByPhone(phone)) {
+            if (userRepository.existsByPhone(input.getPhone())) {
                 return ResponseObject.error(ErrorCode.CONFLICT.getCode(), "Phone number already exists");
             }
             UserModel model = new UserModel();
@@ -85,19 +83,19 @@ public class UserService implements IUserService{
             }
             model.setId(null);
             UserModel savedUser = UserModel.builder()
-                    .name(name)
-                    .email(email)
+                    .name(input.getName())
+                    .email(input.getEmail())
 //                  .password(pwEncoder.encode(pw))
-                    .password(pw)
-                    .phone(phone)
-                    .gender(gender)
-                    .dob(dob)
-                    .address(address)
+                    .password(input.getPassword())
+                    .phone(input.getPhone())
+                    .gender(input.getGender())
+                    .dob(input.getDob())
+                    .address(input.getAddress())
                     .createdAt(now)
                     .updatedAt(now)
                     .lastSigninedTime(model.getLastSigninedTime())
-                    .status(model.getStatus())
-                    .role(model.getRole())
+                    .status(input.getStatus())
+                    .role(input.getRole())
                     .build();
             UserModel savedUserModel = userRepository.save(savedUser);
 
@@ -184,16 +182,13 @@ public class UserService implements IUserService{
     @Override
     public ResponseObject updateUserStatus(int id, Boolean status) {
         try {
-            Optional<UserModel> existingUserOptional = userRepository.findById(id);
-            if (existingUserOptional.isEmpty()) {
+            UserModel existingUserOptional = userRepository.findUserModelById(id);
+            if (existingUserOptional == null) {
                 return ResponseObject.error(ErrorCode.NOT_FOUND.getCode(), "User not found");
             }
+            existingUserOptional.setStatus(status);
 
-            UserModel existingUser = existingUserOptional.get();
-            existingUser.setStatus(status);  // Cập nhật trạng thái người dùng
-            existingUser.setUpdatedAt(LocalDateTime.now());
-
-            UserModel savedUser = userRepository.save(existingUser);
+            UserModel savedUser = userRepository.save(existingUserOptional);
             return ResponseObject.success("User status updated successfully", savedUser);
         } catch (Exception e) {
             log.error("An error occurred while updating the user status: {}", e.getMessage());

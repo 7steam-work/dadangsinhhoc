@@ -2,6 +2,7 @@ package site.dadangsinhhoc.services.user;
 
 import org.springframework.stereotype.Service;
 import site.dadangsinhhoc.dto.LoginDto;
+import site.dadangsinhhoc.dto.UserDTO;
 import site.dadangsinhhoc.dto.response.ResponseObject;
 import site.dadangsinhhoc.models.UserModel;
 
@@ -16,7 +17,7 @@ public interface IUserService {
 
      ResponseObject checkUserExists(String identifier);
 
-     ResponseObject createNewUser(String name, String email, String pw, String re_pw, String phone, String gender, LocalDate dob, String address);
+     ResponseObject createNewUser(UserDTO userdto);
 
      ResponseObject login(String email, String password);
 
