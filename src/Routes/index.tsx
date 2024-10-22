@@ -5,6 +5,7 @@ import Login from '../Pages/Login';
 import Register from '../Pages/Register';
 import Dashboard from '../Pages/Dashboard';
 import UserManager from '../Pages/UserManager';
+import NotFound from '../Pages/NotFound';
 
 const AppRoutes: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const AppRoutes: React.FC = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/user" element={<UserManager />} />
         </Route>
+        <Route path="*" element={<NotFound />} /> {/* Thêm route cho trang 404 */}
       </Routes>
     </Router>
   );
