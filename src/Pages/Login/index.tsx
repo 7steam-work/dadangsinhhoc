@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Box, Typography, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
